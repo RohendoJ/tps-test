@@ -1,3 +1,4 @@
+import { Tps } from "@/lib/entities";
 import { prisma } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest) {
     kode_kec: t.kode_kec?.toString(),
     kode_kel: t.kode_kel?.toString(),
     tps_id: t.tps_id?.toString(),
-  }));
+  })) as Tps[];
 
   if (tpsSerialized.length === 0) {
     return NextResponse.json(
