@@ -61,38 +61,39 @@ export default function Home() {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
-    <main className="flex flex-col justify-center items-center gap-5">
-      <div className="mt-10">
-        <h1>Master TPS pileg prov</h1>
-      </div>
-
-      <div className="flex justify-between w-[900px] items-center">
-        <div>
-          <Button
-            onClick={() => {
-              getTps(currentPage, kecamatanFilter, kelurahanFilter);
-            }}
-            variant={"outline"}
-          >
-            Refresh
-          </Button>
+    <main className="flex justify-center">
+      <section className="w-[300px] sm:w-[550px] md:w-[700px] lg:w-[900px] xl:w-[1200px] flex flex-col gap-5">
+        <div className="mt-10 flex justify-center">
+          <h1>Master TPS pileg prov</h1>
         </div>
 
-        <div className="flex gap-3">
-          <Input
-            onChange={(e) => setKecamatanFilter(e.target.value)}
-            type="text"
-            placeholder="kecamatan"
-          />
-          <Input
-            onChange={(e) => setKelurahanFilter(e.target.value)}
-            type="text"
-            placeholder="kelurahan"
-          />
-        </div>
-      </div>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div className="w-full sm:w-auto">
+            <Button
+              className="w-full"
+              onClick={() => {
+                getTps(currentPage, kecamatanFilter, kelurahanFilter);
+              }}
+              variant={"outline"}
+            >
+              Refresh
+            </Button>
+          </div>
 
-      <div className="w-[900px]">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <Input
+              onChange={(e) => setKecamatanFilter(e.target.value)}
+              type="text"
+              placeholder="kecamatan"
+            />
+            <Input
+              onChange={(e) => setKelurahanFilter(e.target.value)}
+              type="text"
+              placeholder="kelurahan"
+            />
+          </div>
+        </div>
+
         <Table>
           <TableCaption>A list of your recent tps</TableCaption>
           <TableHeader>
@@ -143,41 +144,41 @@ export default function Home() {
             )}
           </TableBody>
         </Table>
-      </div>
 
-      <Pagination className="mb-10">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            />
-          </PaginationItem>
+        <Pagination className="mb-10">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              />
+            </PaginationItem>
 
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (page) => (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  href="#"
-                  onClick={() => setCurrentPage(page)}
-                  isActive={currentPage === page}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            )
-          )}
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    href="#"
+                    onClick={() => setCurrentPage(page)}
+                    isActive={currentPage === page}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
 
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </section>
     </main>
   );
 }
