@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model master_tps {
+  id             BigInt  @id @default(autoincrement())
+  wil_id_prov    BigInt?
+  wil_id_kabkota BigInt?
+  wil_id_kec     BigInt?
+  wil_id_kel     BigInt?
+  kode_pro       BigInt?
+  kode_kab       BigInt?
+  kode_kec       BigInt?
+  kode_kel       BigInt?
+  tps_id         BigInt?
+  tps_no         String? @db.VarChar(50)
+  provinsi       String? @db.VarChar(255)
+  kabkota        String? @db.VarChar(255)
+  kecamatan      String? @db.VarChar(255)
+  kelurahan      String? @db.VarChar(255)
+
+  @@index([kode_kel], map: "kode_kel")
+  @@index([tps_id], map: "tps_id")
+  @@index([wil_id_kel], map: "wil_id_kel")
+}
